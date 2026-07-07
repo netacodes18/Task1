@@ -14,34 +14,34 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <div className="flex flex-col items-center text-center mt-20 mb-32 relative">
+      <div className="flex flex-col items-center text-center mt-12 md:mt-20 mb-20 md:mb-32 relative px-4 md:px-0">
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-md text-[#e76f51] font-bold text-sm mb-8 border border-slate-200 shadow-sm hover:border-[#e76f51]/30 hover:scale-105 transition-all cursor-default group">
           <Sparkles size={16} className="text-[#f4a261] group-hover:animate-spin" />
           Enterprise Grade Assignment
         </div>
 
-        <h1 className="text-7xl font-black text-slate-900 tracking-tighter leading-[1.1] mb-8 max-w-5xl drop-shadow-sm">
-          Intelligent Student Course <br />
+        <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-[1.1] mb-6 md:mb-8 max-w-5xl drop-shadow-sm">
+          Intelligent Student Course <br className="hidden md:block" />
           <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#e76f51] via-[#f4a261] to-orange-400 drop-shadow-sm">
             Allocation Engine
           </span>
         </h1>
 
-        <p className="text-xl text-slate-500 max-w-2xl mb-12 leading-relaxed font-medium">
+        <p className="text-lg md:text-xl text-slate-500 max-w-2xl mb-10 md:mb-12 leading-relaxed font-medium">
           A high-performance algorithmic simulation for dynamic student admissions. Featuring intelligent waitlists, strict category quotas, and an integrated real-time AI assistant.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center gap-6 z-10">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center w-full sm:w-auto gap-4 sm:gap-6 z-10 px-4 sm:px-0">
           <Link
             to="/register"
-            className="group px-8 py-4 bg-gradient-to-r from-[#e76f51] to-orange-500 text-white rounded-full font-bold hover:shadow-[0_15px_40px_rgb(231,111,81,0.4)] hover:-translate-y-1 transition-all flex items-center gap-3 text-lg border border-transparent hover:border-white/20"
+            className="group px-8 py-4 bg-gradient-to-r from-[#e76f51] to-orange-500 text-white rounded-full font-bold hover:shadow-[0_15px_40px_rgb(231,111,81,0.4)] hover:-translate-y-1 transition-all flex justify-center items-center gap-3 text-lg border border-transparent hover:border-white/20"
           >
             <Users size={22} className="group-hover:scale-110 transition-transform" />
             Register Student
           </Link>
           <Link
             to="/dashboard"
-            className="group px-8 py-4 bg-white/80 backdrop-blur-xl text-slate-700 rounded-full font-bold border border-slate-200 hover:border-[#e76f51]/40 hover:bg-white hover:text-[#e76f51] transition-all shadow-sm hover:shadow-[0_15px_40px_rgb(0,0,0,0.05)] hover:-translate-y-1 flex items-center gap-3 text-lg"
+            className="group px-8 py-4 bg-white/80 backdrop-blur-xl text-slate-700 rounded-full font-bold border border-slate-200 hover:border-[#e76f51]/40 hover:bg-white hover:text-[#e76f51] transition-all shadow-sm hover:shadow-[0_15px_40px_rgb(0,0,0,0.05)] hover:-translate-y-1 flex justify-center items-center gap-3 text-lg"
           >
             Admin Dashboard 
             <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
@@ -105,11 +105,11 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white font-bold text-sm mb-6 border border-white/10 backdrop-blur-md">
                 <GraduationCap size={18} /> 100% Acceptance Criteria Met
               </div>
-              <h2 className="text-5xl font-black tracking-tight">Business Rules Implemented</h2>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight">Business Rules Implemented</h2>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative z-10">
             <div className="flex gap-5 p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
               <div className="w-14 h-14 rounded-2xl bg-[#2a9d8f]/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="text-[#2a9d8f]" size={24} />

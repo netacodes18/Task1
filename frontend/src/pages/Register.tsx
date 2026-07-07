@@ -57,7 +57,7 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700 pb-12 mt-12">
+    <div className="max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700 pb-12 mt-4 md:mt-12 px-4 md:px-0">
       <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.03)] relative overflow-hidden">
         <div className="relative z-10">
           <div className="flex flex-col items-center text-center mb-10">

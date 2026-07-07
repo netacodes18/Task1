@@ -251,7 +251,7 @@ export default function Dashboard() {
           <div className="flex-1 overflow-auto pr-2">
             <div className="space-y-4">
               {students.slice(0, 10).map((student) => (
-                <div key={student._id} className="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                <div key={student._id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors gap-3 sm:gap-0">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
                       <Users size={20} />
@@ -266,7 +266,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   
-                  <div className="flex flex-col items-end">
+                  <div className="flex flex-col items-start sm:items-end w-full sm:w-auto mt-2 sm:mt-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                      {student.isAllocated ? (
                         <>
                           <span className="text-sm font-semibold text-slate-800">{student.allocatedCourse?.name || 'Unknown'}</span>
