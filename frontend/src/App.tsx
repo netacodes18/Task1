@@ -8,7 +8,7 @@ function Navigation() {
   const location = useLocation();
   
   return (
-    <nav className="flex flex-row md:flex-col items-center gap-4 md:gap-6 md:mt-10 w-full justify-evenly md:justify-center">
+    <nav className="flex flex-row md:flex-col items-center w-full justify-between md:justify-center md:gap-6 md:mt-10 px-4 md:px-0">
       {/* Logo / Home */}
       <Link 
         to="/" 
