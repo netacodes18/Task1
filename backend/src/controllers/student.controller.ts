@@ -6,6 +6,8 @@ export const registerStudent = async (req: Request, res: Response) => {
     const student = new Student({
       ...req.body,
       applicationDate: req.body.applicationDate ? new Date(req.body.applicationDate) : new Date(),
+      isWaitlisted: true,
+      waitlistCourse: req.body.preferences && req.body.preferences.length > 0 ? req.body.preferences[0] : undefined
     });
     await student.save();
     res.status(201).json(student);

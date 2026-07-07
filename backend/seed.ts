@@ -39,6 +39,46 @@ const seedCourses = async () => {
         obcSeats: 13,
         scSeats: 8,
         stSeats: 4
+      },
+      {
+        name: 'Electronics & Communication (B.Tech)',
+        totalSeats: 45,
+        generalSeats: 22,
+        obcSeats: 12,
+        scSeats: 7,
+        stSeats: 4
+      },
+      {
+        name: 'Information Technology (B.Tech)',
+        totalSeats: 55,
+        generalSeats: 28,
+        obcSeats: 15,
+        scSeats: 8,
+        stSeats: 4
+      },
+      {
+        name: 'Civil Engineering (B.Tech)',
+        totalSeats: 30,
+        generalSeats: 15,
+        obcSeats: 8,
+        scSeats: 5,
+        stSeats: 2
+      },
+      {
+        name: 'Chemical Engineering (B.Tech)',
+        totalSeats: 25,
+        generalSeats: 13,
+        obcSeats: 7,
+        scSeats: 3,
+        stSeats: 2
+      },
+      {
+        name: 'Aerospace Engineering (B.Tech)',
+        totalSeats: 20,
+        generalSeats: 10,
+        obcSeats: 5,
+        scSeats: 3,
+        stSeats: 2
       }
     ];
 
