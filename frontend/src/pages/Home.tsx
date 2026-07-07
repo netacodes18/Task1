@@ -91,7 +91,7 @@ export default function Home() {
       </div>
 
       {/* Business Rules Implementation (Dark Mode Section) */}
-      <div className="bg-slate-900 rounded-[3rem] p-16 text-white relative overflow-hidden shadow-2xl shadow-slate-900/20 mx-4">
+      <div className="bg-slate-900 rounded-[2rem] md:rounded-[3rem] p-6 sm:p-10 md:p-16 text-white relative overflow-hidden shadow-2xl shadow-slate-900/20 mx-4 lg:mx-0">
         {/* Decorative Grid Background */}
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
@@ -100,9 +100,9 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 w-full max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gap-8">
             <div>
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white font-bold text-sm mb-6 border border-white/10 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/10 text-white font-bold text-xs sm:text-sm mb-4 md:mb-6 border border-white/10 backdrop-blur-md">
                 <GraduationCap size={18} /> 100% Acceptance Criteria Met
               </div>
               <h2 className="text-3xl md:text-5xl font-black tracking-tight">Business Rules Implemented</h2>
@@ -110,43 +110,43 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative z-10">
-            <div className="flex gap-5 p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
-              <div className="w-14 h-14 rounded-2xl bg-[#2a9d8f]/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#2a9d8f]/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="text-[#2a9d8f]" size={24} />
               </div>
               <div>
-                <h4 className="font-bold text-xl mb-2 text-white">Merit-Based Priority</h4>
-                <p className="text-slate-400 font-medium leading-relaxed">Algorithm dynamically sorts the database queue by highest Marks first before evaluating seats.</p>
+                <h4 className="font-bold text-lg md:text-xl mb-2 text-white">Merit-Based Priority</h4>
+                <p className="text-slate-400 font-medium leading-relaxed text-sm md:text-base">Algorithm dynamically sorts the database queue by highest Marks first before evaluating seats.</p>
               </div>
             </div>
 
-            <div className="flex gap-5 p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
-              <div className="w-14 h-14 rounded-2xl bg-[#e76f51]/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#e76f51]/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="text-[#e76f51]" size={24} />
               </div>
               <div>
-                <h4 className="font-bold text-xl mb-2 text-white">Strict Category Reservation</h4>
-                <p className="text-slate-400 font-medium leading-relaxed">Independent seat counters for General, OBC, SC, and ST ensuring quotas are mathematically respected.</p>
+                <h4 className="font-bold text-lg md:text-xl mb-2 text-white">Strict Category Reservation</h4>
+                <p className="text-slate-400 font-medium leading-relaxed text-sm md:text-base">Independent seat counters for General, OBC, SC, and ST ensuring quotas are mathematically respected.</p>
               </div>
             </div>
 
-            <div className="flex gap-5 p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="text-blue-400" size={24} />
               </div>
               <div>
-                <h4 className="font-bold text-xl mb-2 text-white">Date Tie-Breakers</h4>
-                <p className="text-slate-400 font-medium leading-relaxed">If two students share identical marks, the algorithm prioritizes the earliest application timestamp.</p>
+                <h4 className="font-bold text-lg md:text-xl mb-2 text-white">Date Tie-Breakers</h4>
+                <p className="text-slate-400 font-medium leading-relaxed text-sm md:text-base">If two students share identical marks, the algorithm prioritizes the earliest application timestamp.</p>
               </div>
             </div>
 
-            <div className="flex gap-5 p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all backdrop-blur-sm group hover:-translate-y-1 hover:shadow-2xl">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="text-purple-400" size={24} />
               </div>
               <div>
-                <h4 className="font-bold text-xl mb-2 text-white">Single Allocation Guarantee</h4>
-                <p className="text-slate-400 font-medium leading-relaxed">Transaction logic ensures a student can only ever consume a single seat across the entire system.</p>
+                <h4 className="font-bold text-lg md:text-xl mb-2 text-white">Single Allocation Guarantee</h4>
+                <p className="text-slate-400 font-medium leading-relaxed text-sm md:text-base">Transaction logic ensures a student can only ever consume a single seat across the entire system.</p>
               </div>
             </div>
           </div>
