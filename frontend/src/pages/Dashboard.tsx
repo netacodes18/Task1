@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Users, BookOpen, UserCheck, UserMinus, ChevronRight, Mic, Calendar } from 'lucide-react';
+import { Users, BookOpen, UserCheck, UserMinus, ChevronRight, Calendar } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
 
 export default function Dashboard() {
