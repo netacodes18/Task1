@@ -4,7 +4,14 @@ import Course from '../models/Course';
 
 export const runAllocation = async (req: Request, res: Response) => {
   try {
-    await Student.updateMany({}, { isAllocated: false, allocatedCourse: null, preferenceMet: null });
+    await Student.updateMany({}, { 
+      isAllocated: false, 
+      allocatedCourse: null, 
+      preferenceMet: null,
+      isWaitlisted: false,
+      waitlistCourse: null,
+      waitlistNumber: null
+    });
     
     const students = await Student.find().sort({ marks: -1, applicationDate: 1 });
     const courses = await Course.find();
@@ -18,6 +25,8 @@ export const runAllocation = async (req: Request, res: Response) => {
         ST: c.stSeats
       };
     });
+
+    const courseWaitlists: Record<string, number> = {};
 
     let allocatedCount = 0;
 
@@ -37,6 +46,16 @@ export const runAllocation = async (req: Request, res: Response) => {
           allocatedCount++;
           break;
         }
+      }
+
+      if (!student.isAllocated && student.preferences.length > 0) {
+        const firstPrefStr = student.preferences[0].toString();
+        courseWaitlists[firstPrefStr] = (courseWaitlists[firstPrefStr] || 0) + 1;
+        
+        student.isWaitlisted = true;
+        student.waitlistCourse = student.preferences[0];
+        student.waitlistNumber = courseWaitlists[firstPrefStr];
+        await student.save();
       }
     }
 

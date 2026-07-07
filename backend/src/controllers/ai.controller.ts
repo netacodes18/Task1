@@ -11,7 +11,7 @@ export const handleAiChat = async (req: Request, res: Response) => {
       return res.status(500).json({ error: "Gemini API key is not configured" });
     }
 
-    const students = await Student.find().populate('allocatedCourse').populate('preferences');
+    const students = await Student.find().populate('allocatedCourse').populate('waitlistCourse').populate('preferences');
     const courses = await Course.find();
 
     const dataContext = {
@@ -22,6 +22,9 @@ export const handleAiChat = async (req: Request, res: Response) => {
         isAllocated: s.isAllocated,
         preferenceMet: s.preferenceMet,
         allocatedCourse: (s.allocatedCourse as any)?.name || null,
+        isWaitlisted: s.isWaitlisted,
+        waitlistCourse: (s.waitlistCourse as any)?.name || null,
+        waitlistNumber: s.waitlistNumber,
         preferences: s.preferences.map((p: any) => p.name || p.toString())
       })),
       courses: courses.map(c => ({

@@ -190,14 +190,14 @@ export default function Dashboard() {
 
         <div className="bg-white p-8 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.03)] flex flex-col justify-between">
           <div className="flex justify-between items-start mb-6">
-            <span className="font-semibold text-slate-800">Unallocated</span>
+            <span className="font-semibold text-slate-800">Waitlisted</span>
             <div className="px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-xs font-medium flex items-center gap-1">
               <UserMinus size={14} /> Pending
             </div>
           </div>
           <div>
-            <p className="text-slate-400 text-sm mb-1">Awaiting allocation</p>
-            <h4 className="text-4xl font-black text-slate-800">{stats?.unallocatedStudents || 0}</h4>
+            <p className="text-slate-400 text-sm mb-1">Queue for priority choice</p>
+            <h4 className="text-4xl font-black text-[#e9c46a]">{stats?.waitlistedStudents || 0}</h4>
           </div>
         </div>
       </div>
@@ -272,6 +272,13 @@ export default function Dashboard() {
                           <span className="text-sm font-semibold text-slate-800">{student.allocatedCourse?.name || 'Unknown'}</span>
                           <span className="text-xs text-[#2a9d8f] font-medium mt-0.5 flex items-center gap-1">
                              <div className="w-1.5 h-1.5 rounded-full bg-[#2a9d8f]"></div> Preference {student.preferenceMet}
+                          </span>
+                        </>
+                      ) : student.isWaitlisted ? (
+                        <>
+                          <span className="text-sm font-semibold text-slate-800">{student.waitlistCourse?.name || 'Unknown'}</span>
+                          <span className="text-xs text-[#e9c46a] font-medium mt-0.5 flex items-center gap-1">
+                             <div className="w-1.5 h-1.5 rounded-full bg-[#e9c46a]"></div> Waitlist #{student.waitlistNumber}
                           </span>
                         </>
                       ) : (

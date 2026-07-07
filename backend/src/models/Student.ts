@@ -9,6 +9,9 @@ export interface IStudent extends Document {
   isAllocated: boolean;
   allocatedCourse: mongoose.Types.ObjectId | null;
   preferenceMet: number | null;
+  isWaitlisted: boolean;
+  waitlistCourse: mongoose.Types.ObjectId | null;
+  waitlistNumber: number | null;
 }
 
 const StudentSchema: Schema = new Schema({
@@ -23,7 +26,10 @@ const StudentSchema: Schema = new Schema({
   preferences: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
   isAllocated: { type: Boolean, default: false },
   allocatedCourse: { type: Schema.Types.ObjectId, ref: 'Course', default: null },
-  preferenceMet: { type: Number, default: null }
+  preferenceMet: { type: Number, default: null },
+  isWaitlisted: { type: Boolean, default: false },
+  waitlistCourse: { type: Schema.Types.ObjectId, ref: 'Course', default: null },
+  waitlistNumber: { type: Number, default: null }
 });
 
 export default mongoose.model<IStudent>('Student', StudentSchema);

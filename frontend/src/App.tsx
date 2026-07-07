@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Register from './pages/Register';
-import { LayoutDashboard, UserPlus, GraduationCap, Settings, Bell } from 'lucide-react';
+import { LayoutDashboard, UserPlus, GraduationCap, Settings, Bell, Home as HomeIcon } from 'lucide-react';
 
 function Navigation() {
   const location = useLocation();
@@ -9,8 +10,8 @@ function Navigation() {
   return (
     <nav className="flex flex-col items-center gap-6 mt-10">
       <Link 
-        to="/" 
-        className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all duration-300 ${location.pathname === '/' ? 'bg-[#e76f51] text-white shadow-lg shadow-[#e76f51]/30' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-700'}`}
+        to="/dashboard" 
+        className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all duration-300 ${location.pathname === '/dashboard' ? 'bg-[#e76f51] text-white shadow-lg shadow-[#e76f51]/30' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-700'}`}
         title="Dashboard"
       >
         <LayoutDashboard size={22} strokeWidth={2.5} />
@@ -40,22 +41,14 @@ function App() {
             </Link>
 
             <Navigation />
-            
-            <div className="mt-auto flex flex-col gap-4">
-              <button className="w-12 h-12 flex items-center justify-center text-slate-400 hover:bg-slate-50 hover:text-slate-700 rounded-2xl transition-colors">
-                <Bell size={22} strokeWidth={2.5} />
-              </button>
-              <button className="w-12 h-12 flex items-center justify-center text-slate-400 hover:bg-slate-50 hover:text-slate-700 rounded-2xl transition-colors">
-                <Settings size={22} strokeWidth={2.5} />
-              </button>
-            </div>
           </div>
         </aside>
 
         {/* Main Content */}
         <main className="flex-1 ml-24 min-h-screen px-10 py-10 max-w-[1600px]">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
           </Routes>
         </main>

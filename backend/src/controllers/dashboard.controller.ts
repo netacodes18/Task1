@@ -6,7 +6,8 @@ export const getDashboardStats = async (req: Request, res: Response) => {
   try {
     const totalStudents = await Student.countDocuments();
     const allocatedStudents = await Student.countDocuments({ isAllocated: true });
-    const unallocatedStudents = totalStudents - allocatedStudents;
+    const waitlistedStudents = await Student.countDocuments({ isWaitlisted: true });
+    const unallocatedStudents = totalStudents - allocatedStudents - waitlistedStudents;
     
     const courses = await Course.find();
     const totalSeats = courses.reduce((acc, c) => acc + c.totalSeats, 0);
@@ -19,6 +20,7 @@ export const getDashboardStats = async (req: Request, res: Response) => {
     res.json({
       totalStudents,
       allocatedStudents,
+      waitlistedStudents,
       unallocatedStudents,
       totalSeats,
       categoryAllocations
