@@ -8,7 +8,15 @@ function Navigation() {
   const location = useLocation();
   
   return (
-    <nav className="flex flex-row md:flex-col items-center gap-4 md:gap-6 md:mt-10 w-full justify-around md:justify-center">
+    <nav className="flex flex-row md:flex-col items-center gap-4 md:gap-6 md:mt-10 w-full justify-evenly md:justify-center">
+      {/* Logo / Home */}
+      <Link 
+        to="/" 
+        className={`w-12 h-12 rounded-[1.25rem] flex items-center justify-center transition-transform shrink-0 ${location.pathname === '/' ? 'bg-slate-900 text-white shadow-lg scale-105' : 'bg-slate-800/5 text-slate-500 hover:bg-slate-900 hover:text-white'}`}
+        title="Home"
+      >
+        <GraduationCap size={24} strokeWidth={2.5} />
+      </Link>
       <Link 
         to="/dashboard" 
         className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all duration-300 ${location.pathname === '/dashboard' ? 'bg-[#e76f51] text-white shadow-lg shadow-[#e76f51]/30' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-700'}`}
@@ -34,12 +42,7 @@ function App() {
         
         {/* Floating Sidebar -> Bottom Nav on Mobile */}
         <aside className="w-full md:w-24 fixed bottom-0 left-0 md:top-0 h-20 md:h-screen flex flex-row md:flex-col items-center p-4 md:py-8 z-50">
-          <div className="bg-white/90 backdrop-blur-xl md:bg-white rounded-[2rem] w-full md:w-[72px] h-full md:flex-1 flex flex-row md:flex-col items-center justify-around md:justify-start px-6 md:px-0 py-0 md:py-6 shadow-[0_-8px_30px_rgb(0,0,0,0.08)] md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200/50 md:border-slate-100/50">
-            {/* Logo */}
-            <Link to="/" className="w-12 h-12 bg-slate-900 rounded-[1.25rem] flex items-center justify-center text-white shadow-lg md:mb-4 hover:scale-105 transition-transform shrink-0">
-              <GraduationCap size={24} strokeWidth={2.5} />
-            </Link>
-
+          <div className="bg-white/90 backdrop-blur-xl md:bg-white rounded-[2rem] w-full md:w-[72px] h-full md:flex-1 flex flex-row md:flex-col items-center justify-center px-4 md:px-0 py-0 md:py-6 shadow-[0_-8px_30px_rgb(0,0,0,0.08)] md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200/50 md:border-slate-100/50">
             <Navigation />
           </div>
         </aside>
