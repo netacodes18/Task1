@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, BookOpen, UserCheck, UserMinus, Sparkles, ChevronRight, Mic, Calendar, Clock, BarChart3, TrendingUp } from 'lucide-react';
+import { Users, BookOpen, UserCheck, UserMinus, ChevronRight, Mic, Calendar } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
 
 export default function Dashboard() {
   const [stats, setStats] = useState<any>(null);
   const [students, setStudents] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'ai', text: string }[]>([]);
@@ -200,7 +199,7 @@ export default function Dashboard() {
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie data={pieData} cx="50%" cy="50%" innerRadius={70} outerRadius={90} paddingAngle={8} dataKey="value" stroke="none">
-                    {pieData.map((entry: any, index: number) => (
+                    {pieData.map((_: any, index: number) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} className="drop-shadow-sm" />
                     ))}
                   </Pie>
@@ -278,6 +277,7 @@ export default function Dashboard() {
           </div>
         </div>
 
+      </div>
     </div>
   );
 }
