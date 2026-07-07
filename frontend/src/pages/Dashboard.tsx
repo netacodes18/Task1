@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Users, BookOpen, UserCheck, UserMinus, ChevronRight, Mic, Calendar } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
@@ -10,6 +10,19 @@ export default function Dashboard() {
   const [query, setQuery] = useState('');
   const [chatHistory, setChatHistory] = useState<{ role: 'user' | 'ai', text: string }[]>([]);
   const [aiLoading, setAiLoading] = useState(false);
+  const aiContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (aiContainerRef.current && !aiContainerRef.current.contains(event.target as Node)) {
+        setChatHistory([]);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchData();
@@ -18,8 +31,8 @@ export default function Dashboard() {
   const fetchData = async () => {
     try {
       const [statsRes, studentsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dashboard/stats'),
-        axios.get('http://localhost:5000/api/students')
+        axios.get(`${API_URL}/api/dashboard/stats`),
+        axios.get(`${API_URL}/api/students`)
       ]);
       setStats(statsRes.data);
       setStudents(studentsRes.data);
@@ -31,7 +44,7 @@ export default function Dashboard() {
 
   const handleRunAllocation = async () => {
     try {
-      await axios.post('http://localhost:5000/api/allocate');
+      await axios.post(`${API_URL}/api/allocate`);
       fetchData();
     } catch (err) {
       alert('Allocation failed.');
@@ -45,10 +58,11 @@ export default function Dashboard() {
     setAiLoading(true);
     
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/chat', { query });
+      const res = await axios.post(`${API_URL}/api/ai/chat`, { query });
       setChatHistory(prev => [...prev, { role: 'ai', text: res.data.reply }]);
-    } catch (err) {
-      setChatHistory(prev => [...prev, { role: 'ai', text: 'Error connecting to AI service. Ensure GEMINI_API_KEY is set.' }]);
+    } catch (err: any) {
+      const errorMsg = err.response?.data?.error || 'Error connecting to AI service.';
+      setChatHistory(prev => [...prev, { role: 'ai', text: errorMsg }]);
     } finally {
       setAiLoading(false);
     }
@@ -87,7 +101,7 @@ export default function Dashboard() {
             onClick={handleRunAllocation}
             className="bg-[#e76f51] hover:bg-[#d65f42] text-white px-6 py-3.5 rounded-full font-medium flex items-center gap-2 transition-all shadow-[0_8px_20px_rgba(231,111,81,0.25)] hover:scale-105 active:scale-95"
           >
-            Show my Tasks <ChevronRight size={18} />
+            Run Allocation Logic <ChevronRight size={18} />
           </button>
           <button className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative">
              <Calendar size={20} />
@@ -95,37 +109,38 @@ export default function Dashboard() {
           </button>
         </div>
 
-        <div className="flex-1 w-full max-w-xl relative flex items-center gap-6 z-50">
-          <div className="flex-1">
-             <h2 className="text-[2.5rem] font-medium text-slate-900 tracking-tight leading-none mb-2">Hey, Need help? 👋</h2>
-             <input 
-               type="text"
-               value={query}
-               onChange={e => setQuery(e.target.value)}
-               onKeyDown={e => e.key === 'Enter' && handleAskAI()}
-               placeholder="Just ask me anything!"
-               className="w-full bg-transparent border-none outline-none text-3xl text-slate-300 placeholder:text-slate-300 font-light p-0 focus:ring-0"
-               disabled={aiLoading}
-             />
-             {aiLoading && <div className="text-sm text-slate-400 mt-3 animate-pulse">Thinking...</div>}
-             {chatHistory.length > 0 && !aiLoading && (
-               <div className="absolute top-full left-0 w-full mt-6 bg-white p-6 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] z-50 max-h-[400px] overflow-y-auto">
-                 {chatHistory.map((msg, idx) => (
-                    <div key={idx} className={`mb-5 last:mb-0 text-[15px] leading-relaxed ${msg.role === 'user' ? 'text-slate-500' : 'text-slate-800 font-medium'}`}>
-                      <strong className="block text-[10px] uppercase tracking-widest text-[#e76f51] mb-1.5">{msg.role === 'user' ? 'You' : 'AI Assistant'}</strong>
-                      {msg.text}
-                    </div>
-                 ))}
-                 <button onClick={() => setChatHistory([])} className="text-xs text-slate-400 hover:text-slate-600 mt-4 font-medium transition-colors">Clear history</button>
-               </div>
-             )}
+        <div ref={aiContainerRef} className="flex-1 w-full max-w-xl relative z-50">
+          <h2 className="text-3xl font-bold text-slate-800 tracking-tight mb-4">Hey, Need help? 👋</h2>
+          <div className="relative">
+            <input 
+              type="text"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleAskAI()}
+              placeholder="Just ask me anything!"
+              className="w-full bg-white px-6 py-4 rounded-[1.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-slate-100 outline-none text-lg text-slate-700 placeholder:text-slate-400 font-medium focus:ring-4 focus:ring-[#e76f51]/10 focus:border-[#e76f51] transition-all pr-16"
+              disabled={aiLoading}
+            />
+            <button 
+              onClick={handleAskAI}
+              disabled={aiLoading || !query}
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#e76f51] text-white p-2.5 rounded-xl hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 transition-all shadow-sm"
+            >
+              <ChevronRight size={20} strokeWidth={2.5} />
+            </button>
           </div>
-          <button 
-            onClick={handleAskAI}
-            className="w-20 h-20 rounded-full bg-white flex flex-shrink-0 items-center justify-center text-slate-700 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:scale-105 transition-transform"
-          >
-            <Mic size={26} strokeWidth={1.5} />
-          </button>
+          {aiLoading && <div className="text-sm text-[#e76f51] font-medium mt-3 ml-2 animate-pulse">AI is thinking...</div>}
+          {chatHistory.length > 0 && !aiLoading && (
+            <div className="absolute top-full left-0 w-full mt-4 bg-white p-6 rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-50 z-50 max-h-[400px] overflow-y-auto">
+              {chatHistory.map((msg, idx) => (
+                 <div key={idx} className={`mb-5 last:mb-0 text-[15px] leading-relaxed ${msg.role === 'user' ? 'text-slate-500' : 'text-slate-800 font-medium'}`}>
+                   <strong className="block text-[10px] uppercase tracking-widest text-[#e76f51] mb-1.5">{msg.role === 'user' ? 'You' : 'AI Assistant'}</strong>
+                   {msg.text}
+                 </div>
+              ))}
+              <button onClick={() => setChatHistory([])} className="text-xs text-slate-400 hover:text-slate-600 mt-4 font-medium transition-colors">Clear history</button>
+            </div>
+          )}
         </div>
       </div>
 

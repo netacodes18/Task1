@@ -15,10 +15,12 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{type: 'success' | 'error', message: string} | null>(null);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/courses');
+        const res = await axios.get(`${API_URL}/api/courses`);
         setCourses(res.data);
       } catch (err) {
         console.error("Failed to fetch courses", err);
@@ -39,7 +41,7 @@ export default function Register() {
     const preferences = [formData.pref1, formData.pref2, formData.pref3].filter(p => p !== '');
     
     try {
-      await axios.post('http://localhost:5000/api/students', {
+      await axios.post(`${API_URL}/api/students`, {
         name: formData.name,
         marks: parseFloat(formData.marks),
         category: formData.category,

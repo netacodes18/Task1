@@ -52,6 +52,15 @@ export const handleAiChat = async (req: Request, res: Response) => {
 
     res.json({ reply: response.text });
   } catch (error: any) {
-    res.status(500).json({ error: error.message });
+    let errorMessage = error.message;
+    try {
+      const parsed = JSON.parse(error.message);
+      if (parsed.error && parsed.error.message) {
+        errorMessage = parsed.error.message;
+      }
+    } catch (e) {
+      // error.message wasn't JSON, leave it as is
+    }
+    res.status(500).json({ error: errorMessage });
   }
 };
