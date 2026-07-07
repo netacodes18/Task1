@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Register from './pages/Register';
-import { LayoutDashboard, UserPlus, GraduationCap, Settings, Bell, Home as HomeIcon } from 'lucide-react';
+import { LayoutDashboard, UserPlus, GraduationCap } from 'lucide-react';
 
 function Navigation() {
   const location = useLocation();

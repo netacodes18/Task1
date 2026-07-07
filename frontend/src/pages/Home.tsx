@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Sparkles, Users, BookOpen, Clock, CheckCircle2, Server, GraduationCap, Code2, ArrowRight, Activity, ShieldCheck, Zap } from 'lucide-react';
+import { Sparkles, Users, BookOpen, Clock, CheckCircle2, GraduationCap, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function Home() {
   return (
